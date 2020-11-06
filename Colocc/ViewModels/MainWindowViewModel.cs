@@ -48,6 +48,7 @@ namespace Colocc.ViewModels
             _dialogService = dialogService;
             OpenAotuRun(true);
             Thread thread = new Thread(Show);
+            thread.IsBackground = true;
             thread.Start();
             _stopwatch.Restart();
         }
