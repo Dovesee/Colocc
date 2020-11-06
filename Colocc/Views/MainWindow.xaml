@@ -1,0 +1,24 @@
+﻿<Window x:Class="Colocc.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/" Topmost="True"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="125" Width="225" >
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5">
+                <CheckBox IsChecked="{Binding IsOpenRun}">开机自启动</CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock>工作时间</TextBlock>
+                <TextBox Text="{Binding WorkTime}" BorderThickness="0"></TextBox>
+                <TextBlock>休息时间</TextBlock>
+                <TextBox Text="{Binding FreeTime}" BorderThickness="0"></TextBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
