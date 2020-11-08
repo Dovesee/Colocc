@@ -16,6 +16,7 @@ namespace Colocc.ViewModels
         private uint _freeTime = 5;
         private bool _isOpenRun = true;
         private bool _freeFlag=false;
+        private string _message;
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private readonly IDialogService _dialogService;
         private readonly ILog _log;
@@ -42,9 +43,15 @@ namespace Colocc.ViewModels
             get { return _isOpenRun; }
             set { SetProperty(ref _isOpenRun, value); OpenAotuRun(value); }
         }
+
+        public string Message
+        {
+            get { return _message; }
+            set { SetProperty(ref _message, value); }
+        }
         public MainWindowViewModel(IDialogService dialogService)
         {
-            _log = new LogTextFileApplication(_title);
+            _log = new LogTextFileApplication(_title) { InfoIsEnable=true};
             _dialogService = dialogService;
             OpenAotuRun(true);
             Thread thread = new Thread(Show);
@@ -71,10 +78,12 @@ namespace Colocc.ViewModels
                                 _dialogService.ShowDialog("MessageDialog", new DialogParameters() { { "message", "开始工作？" } }, OpenShowWork);
                             });
                         }
-                        Thread.Sleep(30000);
+                        Thread.Sleep(2000);
+                        Message = "休息了" + Math.Round(_stopwatch.ElapsedMilliseconds / 60000.0,1)+"分钟";
                     }
                 }
-                Thread.Sleep(30000);
+                Thread.Sleep(2000);
+                Message = "工作了" + Math.Round(_stopwatch.ElapsedMilliseconds / 60000.0, 1) + "分钟";
             }
         }
         private void OpenShowWork(IDialogResult obj)
