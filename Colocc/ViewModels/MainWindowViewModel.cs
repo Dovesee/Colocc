@@ -12,7 +12,7 @@ namespace Colocc.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private string _title = "ColoccWorkTime";
-        private uint _workTime = 45;
+        private uint _workTime = 30;
         private uint _freeTime = 5;
         private bool _isOpenRun = true;
         private bool _freeFlag=false;
