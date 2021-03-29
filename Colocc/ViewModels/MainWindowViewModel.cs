@@ -67,7 +67,7 @@ namespace Colocc.ViewModels
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _dialogService.ShowDialog("MessageDialog", new DialogParameters() { { "message", "开始休息？" } }, ShowWorkShutDown);
+                        _dialogService.ShowDialog("MessageDialog", new DialogParameters() { { "message", "！！！起立--运动！！！" } }, ShowWorkShutDown);
                     });
                     while (_freeFlag)
                     {
@@ -75,7 +75,7 @@ namespace Colocc.ViewModels
                         {
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                _dialogService.ShowDialog("MessageDialog", new DialogParameters() { { "message", "开始工作？" } }, OpenShowWork);
+                                _dialogService.ShowDialog("MessageDialog", new DialogParameters() { { "message", " 开始工作 " } }, OpenShowWork);
                             });
                         }
                         Thread.Sleep(2000);
