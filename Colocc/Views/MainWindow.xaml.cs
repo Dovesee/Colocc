@@ -42,7 +42,7 @@ namespace Colocc.Views
             _notifyIcon.Visible = true;
 
             //设置图标。
-            _notifyIcon.Icon = ColoccResource.f8;
+            _notifyIcon.Icon = Properties.Resources.f81;
             //设置菜单栏。有3个item选项，分别是显示、隐藏、退出。并为其添加事件。
             System.Windows.Forms.MenuItem showMenuItem = new System.Windows.Forms.MenuItem("显示");
             showMenuItem.Click += new EventHandler(ShowMenuItem_Click);
