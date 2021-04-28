@@ -49,9 +49,9 @@ namespace Colocc.ViewModels
             get { return _message; }
             set { SetProperty(ref _message, value); }
         }
-        public MainWindowViewModel(IDialogService dialogService)
+        public MainWindowViewModel(IDialogService dialogService,ILog log)
         {
-            _log = new LogTextFileApplication(_title) { InfoIsEnable=true};
+            _log = log;// new LogTextFileApplication(_title) { InfoIsEnable=true};
             _dialogService = dialogService;
             OpenAotuRun(true);
             Thread thread = new Thread(Show);

@@ -1,6 +1,8 @@
-﻿using Colocc.Views;
+﻿using Colocc.ViewModels;
+using Colocc.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using System.Reflection;
 using System.Windows;
 
 namespace Colocc
@@ -18,6 +20,8 @@ namespace Colocc
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialog<MessageDialog, ViewModels.MessageDialogViewModel>();
+            containerRegistry.RegisterInstance<ILog>(new LogTextFileApplication(Assembly.GetExecutingAssembly().GetName().Name+
+               Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version) { InfoIsEnable = true });
         }
     }
 }
