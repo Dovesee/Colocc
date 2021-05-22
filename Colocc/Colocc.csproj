@@ -117,7 +117,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(ProjectDir)Properties\BeforeBuildProject.bat" $(ProjectDir)Properties\ $(ProjectDir)Properties\</PreBuildEvent>
+    <PreBuildEvent>"$(ProjectDir)Properties\BeforeBuildProject.bat" $(ProjectDir)Properties\</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
