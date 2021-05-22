@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 Colocc/Properties/Resources.Designer.cs
+Colocc/Properties/AssemblyInfo.cs
