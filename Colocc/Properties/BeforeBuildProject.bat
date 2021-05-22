@@ -1,10 +1,5 @@
-::-------------------------------------------------
-:: <sunmary>
-:: 根据指定工作目录信息和模板生成目标文件
-:: </sunmary>
-:: <param name="WorkDir">工作目录路径</param>
+:: <param name="WorkDir">脚本工作目录路径</param>
 :: <returns>执行结果</returns>
-::=================================================
 
 ::-------------------------------------------------
 :: * Initialize *
@@ -29,26 +24,31 @@ Rem Check arguments
 IF %WorkDir%=="" GOTO ARGUNENT_ERROR
 PushD %WorkDir%
 
-Rem Search TSVN Path
-
-SET GIT_PATH="E:\Git\bin\sh.exe" --login -i
+::获得工作目录的commit次数和最后一次commit 默认使用安装到c盘的git
+SET GIT_PATH="C:\Program Files\Git\bin\sh.exe" --login -i
 call %GIT_PATH% %WorkDir%git_ver
 
-for /f "delims=" %%i in (%WorkDir%\git_version.tmp) do (set VERSION=%%i)&(goto :next)
+for /f "tokens=1" %%i in (%WorkDir%\git_version.tmp) do (set VERSION=%%i)
+for /f "tokens=2" %%i in (%WorkDir%\git_version.tmp) do (set GITVERSIONCOMMIT=%%i)&(goto :next)
+
 :next
 DEL /Q "%WorkDir%\git_version.tmp">NUL
 
 COPY /y "%WorkDir%AssemblyInfo.cs" "%WorkDir%AssemblyInfo.cs.bak">NUL
-SET FILESTR="%WorkDir%AssemblyInfo.cs"
-FindStr /v "AssemblyVersion AssemblyFileVersion" %FILESTR%>%AssemblyInfo%
+
+set BUILDTIME=%date:~0,10% %time:~0,5%
 
 For /f "delims=" %%k In (%WorkDir%AssemblyInfo.tpl) do (
   set str=%%k
-  set str=!str:GITVERSION=%VERSION%!
+  set str=!str:G#COMMIT=%GITVERSIONCOMMIT%!
+  set str=!str:G#V#C=%VERSION%!
+  set str=!str:B#DATE=%BUILDTIME%!
   echo !str! >> "%AssemblyInfo%"
 )
 
-COPY /y "%AssemblyInfo%" "%WorkDir%AssemblyInfo.cs"
+DEL /Q "%WorkDir%AssemblyInfo.cs">NUL
+
+Ren ASSEMBLY_INFO.tmp AssemblyInfo.cs
 
 GOTO SUCCESS
 ::=================================================
@@ -74,7 +74,6 @@ popd
 EXIT 1
 
 :SUCCESS
-DEL /Q "%AssemblyInfo%">NUL
 DEL /Q "%WorkDir%AssemblyInfo.cs.bak" 2>NUL
 ECHO "success"
 popd

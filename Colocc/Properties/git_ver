@@ -1,8 +1,8 @@
 # file name: git_ver.sh
 #!/bin/bash 
 VER_FILE=git_version.tmp
-LOCALVER=`git rev-list HEAD | wc -l | awk '{print $1}'`
-VER=r$LOCALVER
-VER="$VER $(git rev-list HEAD -n 1 | cut -c 1-7)"
+LOCALVER=`git rev-list HEAD . | wc -l | awk '{print $1}'`
+VER=$LOCALVER
+VER="$VER $(git rev-list HEAD -n 1 .| cut -c 1-7)"
 GIT_VERSION=$VER
 echo $GIT_VERSION>$VER_FILE
