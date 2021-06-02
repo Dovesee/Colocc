@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Colocc.Views
 {
@@ -10,6 +11,10 @@ namespace Colocc.Views
         public MessageDialog()
         {
             InitializeComponent();
+        }
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ((Window)sender).DragMove();
         }
     }
 }

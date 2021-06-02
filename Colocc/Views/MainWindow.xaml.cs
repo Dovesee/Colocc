@@ -127,5 +127,15 @@ namespace Colocc.Views
                 e.Cancel = false;
             }
         }
+
+        private void mian_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

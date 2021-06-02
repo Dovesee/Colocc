@@ -1,26 +1,71 @@
-﻿<Window x:Class="Colocc.Views.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"  
-        prism:ViewModelLocator.AutoWireViewModel="True"  WindowStyle="ToolWindow" Topmost="True"
-        Title="{Binding Title}" Height="125" Width="225" Name="mian"  Closing="Mian_Closing"  >
-    <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel  Margin="5">
-                <CheckBox IsChecked="{Binding IsOpenRun}">开机自启动</CheckBox>
-                <TextBlock Margin="0 5" Text="{Binding Message}" TextWrapping="Wrap"/>
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="Colocc.Views.MainWindow"  
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}"  x:Name="mian"  Closing="Mian_Closing"
+        WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"      
+        ShowInTaskbar="True" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" >
+    <Window.Resources>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="15" x:Name="border" Background="{TemplateBinding Background}"  SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="#007ABB"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="#008ABA"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border CornerRadius="9" Background="White" MouseLeftButtonDown="mian_MouseLeftButtonDown" BorderBrush="LightGray" BorderThickness="1">
+        <Border CornerRadius="9" BorderThickness="0"  Background="#FF008792" Margin="0 0 0 6">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Foreground="White" Margin="5,0" VerticalAlignment="Top"><Run Text="{Binding Title}"  FontWeight="Light"/></TextBlock>
+                <Button Content="x" HorizontalAlignment="Right" Margin="5 0" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="12" Height="30" Width="30" 
+                    Click="Button_Click" Style="{DynamicResource ButtonStyle1}" />
+                <Grid Grid.Row="1" Background="White" Margin="0"/>
+                <Grid Grid.Row="1" Margin="15" Height="110" Width="300">
+                    <StackPanel>
+                        <CheckBox IsChecked="{Binding IsOpenRun}" Content="开机自启动"/>
+                        <TextBlock Margin="0 5" Text="{Binding Message}" TextWrapping="Wrap"/>
+                        <TextBlock Text="工作时间"/>
+                        <TextBox Text="{Binding WorkTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
+                        <TextBlock Text="休息时间"/>
+                        <TextBox Text="{Binding FreeTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
+                    </StackPanel>
+                </Grid>
 
-            </StackPanel>
-            <StackPanel Grid.Column="1" Margin="5">
-                <TextBlock>工作时间</TextBlock>
-                <TextBox Text="{Binding WorkTime}" BorderThickness="0"></TextBox>
-                <TextBlock>休息时间</TextBlock>
-                <TextBox Text="{Binding FreeTime}" BorderThickness="0"></TextBox>
-            </StackPanel>
-        </Grid>
-    </Grid>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
