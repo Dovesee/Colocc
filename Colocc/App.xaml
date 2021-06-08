@@ -4,6 +4,6 @@
 	     xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:Colocc">
     <Application.Resources>
-         
+        <DropShadowEffect x:Key="MaterialDesignShadowDepth2" BlurRadius="8" ShadowDepth="1.5" Direction="270" Color="#AA000000" Opacity=".42" />
     </Application.Resources>
 </prism:PrismApplication>

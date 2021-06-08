@@ -43,29 +43,28 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Border CornerRadius="9" Background="White" MouseLeftButtonDown="mian_MouseLeftButtonDown" BorderBrush="LightGray" BorderThickness="1">
-        <Border CornerRadius="9" BorderThickness="0"  Background="#FF008792" Margin="0 0 0 6">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Foreground="White" Margin="5,0" VerticalAlignment="Top"><Run Text="{Binding Title}"  FontWeight="Light"/></TextBlock>
-                <Button Content="x" HorizontalAlignment="Right" Margin="5 0" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="12" Height="30" Width="30" 
+    <Grid Margin="15" Background="Transparent" MouseLeftButtonDown="mian_MouseLeftButtonDown" >
+        <Border CornerRadius="9" Background="White"  Effect="{DynamicResource MaterialDesignShadowDepth2}"/>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="9 9 0 0" Grid.Row="0" Background="#FF008792"  />
+            <TextBlock Foreground="White" Margin="5,0" VerticalAlignment="Center"><Run Text="{Binding Title}"  FontWeight="Light" /></TextBlock>
+            <Button Content="x" HorizontalAlignment="Right" Margin="5 0" Foreground="White" Background="Transparent" BorderThickness="0" FontSize="12" Height="30" Width="30" 
                     Click="Button_Click" Style="{DynamicResource ButtonStyle1}" />
-                <Grid Grid.Row="1" Background="White" Margin="0"/>
-                <Grid Grid.Row="1" Margin="15" Height="110" Width="300">
-                    <StackPanel>
-                        <CheckBox IsChecked="{Binding IsOpenRun}" Content="开机自启动"/>
-                        <TextBlock Margin="0 5" Text="{Binding Message}" TextWrapping="Wrap"/>
-                        <TextBlock Text="工作时间"/>
-                        <TextBox Text="{Binding WorkTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
-                        <TextBlock Text="休息时间"/>
-                        <TextBox Text="{Binding FreeTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
-                    </StackPanel>
-                </Grid>
-
+            <Grid Grid.Row="1" Margin="15" Height="110" Width="300">
+                <StackPanel>
+                    <CheckBox IsChecked="{Binding IsOpenRun}" Content="开机自启动"/>
+                    <TextBlock Margin="0 5" Text="{Binding Message}" TextWrapping="Wrap"/>
+                    <TextBlock Text="工作时间"/>
+                    <TextBox Text="{Binding WorkTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
+                    <TextBlock Text="休息时间"/>
+                    <TextBox Text="{Binding FreeTime}" Width="30" HorizontalAlignment="Left" BorderThickness="0 0 0 1"/>
+                </StackPanel>
             </Grid>
-        </Border>
-    </Border>
-</Window>
+
+        </Grid>
+    </Grid>
+   </Window>
